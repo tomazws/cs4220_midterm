@@ -66,14 +66,15 @@ Proposed rundown:
         - Game Series:                              Use /api/amiibo/?gameseries=value
         - Amiibo Series:                            Use /api/amiibo/?amiiboSeries=value
         - Character                                 Use /api/amiibo/?character=value
-4. Gets response from API, prompts user to select ONE item from the search results
-5. If !cache:
+4. Gets response from API, saves search results in search_history.json
+5. Prompts user to select ONE item from the search results
+6. If !cache:
     - Get item by ID from API:                      Use /api/amiibo/?id=value
     - Save entry in search_cache.json
     Else if cache:
     - Attempt to find item in search_cache.json
         - If not found, get item by ID from API:    Use /api/amiibo/?id=value
             - Save entry in search_cache.json
-6. Display detailed data all nice and shit.
-7. Fucking done.
+7. Display detailed data all nice and shit.
+8. Fucking done.
 */
