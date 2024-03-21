@@ -44,3 +44,35 @@ app.js:
 
 import * as api from './api.js';
 import * as db from './db.js';
+
+
+/*
+Proposed rundown:
+
+1. Prompts the user to select search options:
+    - Search by:
+        - Name
+        - Type
+        - Game Series
+        - Amiibo Series
+        - Character
+
+2. User selects search option and enters keyword
+3. Performs search based on selected option and keyword
+    - If search by:
+        - Name:                                     Use /api/amiibo/?name=value
+        - Type:                                     Use /api/amiibo/?type=value
+        - Game Series:                              Use /api/amiibo/?gameseries=value
+        - Amiibo Series:                            Use /api/amiibo/?amiiboSeries=value
+        - Character                                 Use /api/amiibo/?character=value
+4. Gets response from API, prompts user to select ONE item from the search results
+5. If !cache:
+    - Get item by ID from API:                      Use /api/amiibo/?id=value
+    - Save entry in search_cache.json
+    Else if cache:
+    - Attempt to find item in search_cache.json
+        - If not found, get item by ID from API:    Use /api/amiibo/?id=value
+            - Save entry in search_cache.json
+6. Display detailed data all nice and shit.
+7. Fucking done.
+*/
