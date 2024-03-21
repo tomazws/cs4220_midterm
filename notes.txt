@@ -8,7 +8,7 @@ npm install --save @inquirer/prompts
 
 // Displaying help
 node cli.js --help
-node cli.js play --help
+node cli.js xxx --help
 
 // To run the app 
-node cli.js play poker
+node cli.js xxx yyy
