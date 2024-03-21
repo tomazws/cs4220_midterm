@@ -16,6 +16,7 @@ Authors:
     Isaac Mendoza
     Jason Schmidt
     Alberto Barboza
+    Angel Penate
 
 app.js:
     Exports function to handle the logic for when a user searches by keyword.

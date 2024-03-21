@@ -16,6 +16,7 @@ Authors:
     Isaac Mendoza
     Jason Schmidt
     Alberto Barboza
+    Angel Penate
 
 db.js:
     The exact db.js file from cards-cli-app-completed (Week 09)

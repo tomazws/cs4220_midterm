@@ -16,6 +16,7 @@ Authors:
     Isaac Mendoza
     Jason Schmidt
     Alberto Barboza
+    Angel Penate
 
 cli.js:
     Includes a help menu by typing: node cli.js --help
