@@ -1,0 +1,14 @@
+// Initialize directory as project
+npm init
+
+// Install required packages
+npm install --save axios
+npm install --save yargs
+npm install --save @inquirer/prompts
+
+// Displaying help
+node cli.js --help
+node cli.js play --help
+
+// To run the app 
+node cli.js play poker

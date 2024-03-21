@@ -1,0 +1,19 @@
+{
+  "name": "midterm-project",
+  "version": "1.0.0",
+  "description": "CS4220 Midterm Project - AmiiboAPI",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomazws/cs4220_midterm.git"
+  },
+  "author": "Thomas Yeung, Isaac Mendoza, Jason Schmidt, Alberto Barboza, Angel Penate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomazws/cs4220_midterm/issues"
+  },
+  "homepage": "https://github.com/tomazws/cs4220_midterm#readme"
+}
