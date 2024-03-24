@@ -47,43 +47,7 @@ import { checkbox } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
 
-/*
-Proposed rundown:
-1. User running the app by executing:
-	node cli.js search <keryword>
-		Make sure we include the option to return cached results when available
-			Ex: node cli.js search mario
-	Make sure we include --help in cli.js
-	node cli.js history to display a history of all previous searches
-
-2. Perform search keyword with API, and record keyword into search_history.json
-	We will need to decide which area to search. There are 5 areas we could search, pick ONE:
-        	- Name:			    Use /api/amiibo/?name=value
-        	- Type:			    Use /api/amiibo/?type=value
-        	- Game Series:		Use /api/amiibo/?gameseries=value
-        	- Amiibo Series:	Use /api/amiibo/?amiiboSeries=value
-        	- Character		    Use /api/amiibo/?character=value
-
-3. Display SORTED search results and prompt user to select ONE
-	Ex:
-		[ ] Baby Mario
-		[ ] Mario
-		[ ] Metal Mario
-		etc...
-
-4. If !cache:
-    - Get item by ID from API:                      Use /api/amiibo/?id=value
-    - Save entry in search_cache.json
-    Else if cache:
-    - Attempt to find item in search_cache.json
-        - If not found, get item by ID from API:    Use /api/amiibo/?id=value
-            - Save entry in search_cache.json
-
-5. Display detailed data
-*/
-
-// helper functions for printing
-const _printConsole = (data) => {
+const _printConsole = (some_shit) => {
     console.log('I print shit so fucking beautiful');
 };
 
