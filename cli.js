@@ -36,15 +36,15 @@ import { search, history } from './app.js';
 yargs(hideBin(process.argv))
     .usage('$0: Usage <command> [options]')
     .command(
-        'search <game>',
-        'Search character by XXXXXX',
+        'search <keyword>',
+        'Search character by game series',
         (yargs) => {
-            yargs.positional('game', {
-                describe: 'Keyword to search for',
+            yargs.positional('keyword', {
+                describe: 'Game series to search for',
                 type: 'string'
             }).options('cache', {
                 alias: 'c',
-                describe: 'Returns cached results when available',
+                describe: 'Return cached results when available',
                 type: 'boolean',
                 default: false
             });

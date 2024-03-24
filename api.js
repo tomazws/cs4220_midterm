@@ -35,8 +35,10 @@ export const searchByKeyword = async (keyword) => {
         	- Game Series:		https://amiiboapi.com/api/amiibo/?gameseries=value
         	- Amiibo Series:	https://amiiboapi.com/api/amiibo/?amiiboSeries=value
         	- Character		    https://amiiboapi.com/api/amiibo/?character=value
+            As of now, I just selected Game Series. We can change it later.
+            So user searches a game series, and then they could select a character from a list of game series.
         */
-        const response = await axios.get(`${baseURL}?deck_count=${keyword}`);
+        const response = await axios.get(`${baseURL}?gameseries=${keyword}`);
         return response.data;
     } catch (error) {
         return error;
