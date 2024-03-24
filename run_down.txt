@@ -1,24 +1,9 @@
 /*
-CS4220 Midterm Project
+Overview:
+- Search game series (or any other searchable fields) to obtain a list of characters.
+- User selects a character from the list to obtain detailed information of the character.
 
-API:
-    AmiiboAPI
-
-API Description:
-    A RESTful API that contains the Amiibo Database that was created on the excel spreadsheet:
-    https://docs.google.com/spreadsheets/d/19E7pMhKN6x583uB6bWVBeaTMyBPtEAC-Bk59Y6cfgxA/edit#gid=0
-
-API documentations:
-    https://amiiboapi.com/docs/
-
-Authors:
-    Thomas Yeung
-    Isaac Mendoza
-    Jason Schmidt
-    Alberto Barboza
-    Angel Penate
-
-Proposed rundown:
+Rundown:
 1. User running the app by executing:
 	node cli.js search <keryword>
 		Make sure we include the option to return cached results when available
@@ -27,14 +12,10 @@ Proposed rundown:
 	node cli.js history to display a history of all previous searches
 
 2. Perform search keyword with API, and record keyword into search_history.json
-	We will need to decide which area to search. There are 5 areas we could search, pick ONE:
-        	- Name:				Use /api/amiibo/?name=value
-        	- Type:				Use /api/amiibo/?type=value
-        	- Game Series:		Use /api/amiibo/?gameseries=value
-        	- Amiibo Series:	Use /api/amiibo/?amiiboSeries=value
-        	- Character			Use /api/amiibo/?character=value
+	For example, we would search game series:
+        	- Game Series: Use /api/amiibo/?gameseries=value
 
-3. Display SORTED search results and prompt user to select ONE
+3. Display SORTED search results and prompt user to select a character
 	Ex:
 		[ ] Baby Mario
 		[ ] Mario
@@ -42,11 +23,11 @@ Proposed rundown:
 		etc...
 
 4. If !cache:
-    - Get item by ID from API:                      Use /api/amiibo/?id=value
+    - Get item by ID from API: Use /api/amiibo/?id=value
     - Save entry in search_cache.json
     Else if cache:
     - Attempt to find item in search_cache.json
-        - If not found, get item by ID from API:    Use /api/amiibo/?id=value
+        - If not found, get item by ID from API: Use /api/amiibo/?id=value
             - Save entry in search_cache.json
 
 5. Display detailed data
