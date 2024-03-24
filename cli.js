@@ -31,3 +31,34 @@ cli.js:
 
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
+import { search, history } from './app.js';
+
+yargs(hideBin(process.argv))
+    .usage('$0: Usage <command> [options]')
+    .command(
+        'search <game>',
+        'Search character by XXXXXX',
+        (yargs) => {
+            yargs.positional('game', {
+                describe: 'Keyword to search for',
+                type: 'string'
+            }).options('cache', {
+                alias: 'c',
+                describe: 'Returns cached results when available',
+                type: 'boolean',
+                default: false
+            });
+        },
+        (args) => {
+            searchAmiibo(args);
+        }
+    )
+    .command(
+        'history',
+        'View search history',
+        () => {},
+        () => {
+            history();
+        }
+    )
+    .help().argv;

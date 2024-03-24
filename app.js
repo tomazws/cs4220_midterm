@@ -43,9 +43,9 @@ app.js:
             Reference search_history.json
 */
 
+import { checkbox } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
-
 
 /*
 Proposed rundown:
@@ -58,18 +58,17 @@ Proposed rundown:
 
 2. Perform search keyword with API, and record keyword into search_history.json
 	We will need to decide which area to search. There are 5 areas we could search, pick ONE:
-        	- Name:			Use /api/amiibo/?name=value
-        	- Type:			Use /api/amiibo/?type=value
+        	- Name:			    Use /api/amiibo/?name=value
+        	- Type:			    Use /api/amiibo/?type=value
         	- Game Series:		Use /api/amiibo/?gameseries=value
         	- Amiibo Series:	Use /api/amiibo/?amiiboSeries=value
-        	- Character		Use /api/amiibo/?character=value
+        	- Character		    Use /api/amiibo/?character=value
 
 3. Display SORTED search results and prompt user to select ONE
 	Ex:
-		[ ] Baby Mario from Mario Sports Superstars
-		[ ] Mario from Super Mario Bros.
-		[ ] Mario from 8-bit Mario
-		[ ] Metal Mario from Mario Sports Superstars
+		[ ] Baby Mario
+		[ ] Mario
+		[ ] Metal Mario
 		etc...
 
 4. If !cache:
@@ -82,3 +81,38 @@ Proposed rundown:
 
 5. Display detailed data
 */
+
+// helper functions for printing
+const _printConsole = (data) => {
+    console.log('I print shit so fucking beautiful');
+};
+
+const _selectionPrompt = async (characters) => {
+    const displayCharacters = characters.map((character) => {
+        return { name: character.name_or_some_shit, id: character.id };
+    });
+
+    return await checkbox({// Is there a radio button version? Instead of using checkbox????????
+        message: 'Select a character',
+        choices: displayCharacters,
+        validate: (characters) => {
+            if (characters.length > 1) {
+                return 'Your may only select 1 character';
+            } else {
+                return true;
+            }
+        }
+    });
+};
+
+export const searchAmiibo = async (args) => {
+    try {
+        // good luck
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const history = async () => {
+    // good luck
+};

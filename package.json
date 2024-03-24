@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tomazws/cs4220_midterm#readme",
   "dependencies": {
+    "@inquirer/prompts": "^4.3.0",
     "axios": "^1.6.8",
     "yargs": "^17.7.2"
   }
