@@ -1,7 +1,7 @@
 /*
 Overview:
-- Search game series (or any other searchable fields) to obtain a list of characters.
-- User selects a character from the list to obtain detailed information of the character.
+- Search game series (or any other searchable fields) to obtain a list of results.
+- User selects one from the list of results to obtain detailed information of that selection.
 
 Rundown:
 1. User running the app by executing:
@@ -12,8 +12,8 @@ Rundown:
 	node cli.js history to display a history of all previous searches
 
 2. Perform search keyword with API, and record keyword into search_history.json
-	For example, we would search game series:
-        	- Game Series: Use /api/amiibo/?gameseries=value
+	For example, we would search character:
+        	- Game Series: Use /api/amiibo/?character=value
 
 3. Display SORTED search results and prompt user to select a character
 	Ex:

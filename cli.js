@@ -37,10 +37,10 @@ yargs(hideBin(process.argv))
     .usage('$0: Usage <command> [options]')
     .command(
         'search <keyword>',
-        'Search character by game series',
+        'Search ??????',
         (yargs) => {
             yargs.positional('keyword', {
-                describe: 'Game series to search for',
+                describe: 'Keyword to search for',
                 type: 'string'
             }).options('cache', {
                 alias: 'c',
