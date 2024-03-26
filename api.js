@@ -17,6 +17,7 @@ Authors:
     Jason Schmidt
     Alberto Barboza
     Angel Penate
+    Brian Mojica
 
 api.js:
     Exports a function for searching the selected API by keyword and returns the response

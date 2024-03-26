@@ -17,6 +17,7 @@ Authors:
     Jason Schmidt
     Alberto Barboza
     Angel Penate
+    Brian Mojica
 
 app.js:
     Exports function to handle the logic for when a user searches by keyword.
@@ -46,7 +47,7 @@ import { select as select } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
 
-//helper function for printing
+// Helper function for printing
 const _printConsole = (amiibo) => {
     console.log('----------------------');
     amiibo.forEach(element => {
