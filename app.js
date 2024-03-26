@@ -57,8 +57,6 @@ const _printConsole = (amiibo) => {
     
 }
 
-
-
 const _selectionPrompt = async (amiibos) => {
     const displayCharacters = amiibos.map((character) => {
         return { name: `${character.name} ( ${character.gameSeries} )
@@ -69,8 +67,7 @@ const _selectionPrompt = async (amiibos) => {
 
     return await select({// Is there a radio button version? Instead of using checkbox????????
         message: 'Select a character',
-        choices: displayCharacters,
-        
+        choices: displayCharacters
     });
 };
 
@@ -82,15 +79,29 @@ const _findAndRemove = (original, throwaway) => {
 
 export const searchAmiibo = async (args) => {
     try {
+        // Search the API by keyword
         const amiibos = await api.searchByKeyword(args.keyword);
+
+        // Save keyword in the mock database: search_history.json
+        // CODE HERE
+        
+        // Prompt user to select an item from the search results
         const throwaway = await _selectionPrompt(amiibos.amiibo);
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
         _printConsole(filtered);
+
+        // Retrieve detailed data for the selected item based on the cache option
+        // If cache option is true
+        //     Attempt to find the selected item in search_cache.json and return the item
+        // If not found in the search_cache.json, or if cache option is false
+        //     Get the selected item by unique identifier from the API
+        //     Save an entry in search_cache.json
+        // Display the detailed data of the selected character to the user in a user-friendly format
     } catch (error) {
         console.error(error);
     }
 };
 
 export const history = async () => {
-    // good luck
+    // Display a list of keywords recorded in seasrch history: search_history.json
 };
