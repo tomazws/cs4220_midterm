@@ -29,7 +29,7 @@ cli.js:
         No additional arguments or options
 */
 
-import yargs from 'yargs/yargs';
+import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { searchAmiibo, history } from './app.js';
 
@@ -40,7 +40,7 @@ yargs(hideBin(process.argv))
         'Search ??????',
         (yargs) => {
             yargs.positional('keyword', {
-                describe: 'Keyword to search for',
+                describe: 'Search for amiibo',
                 type: 'string'
             }).options('cache', {
                 alias: 'c',

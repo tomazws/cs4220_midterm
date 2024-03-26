@@ -47,13 +47,25 @@ import { checkbox } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
 
-const _printConsole = (some_shit) => {
-    console.log('I print shit so fucking beautiful');
-};
+//helper function for printing
+const _printConsole = (amiibo) => {
+    console.log('----------------------');
+    amiibo.forEach(element => {
+        console.log(element.name + " [" + element.gameSeries +"] (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
+         + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")")
+         console.log('----------------------');
+    });
+    
+}
 
-const _selectionPrompt = async (characters) => {
-    const displayCharacters = characters.map((character) => {
-        return { name: character.name_or_some_shit, id: character.id };
+
+
+const _selectionPrompt = async (amiibos) => {
+    const displayCharacters = amiibos.map((character) => {
+        return { name: `${character.name} ( ${character.gameSeries} )
+         (NA) ${character.release['na'] == null ? "not released" :character.release['na'].substring(0,4)},
+         (JP) ${character.release['jp'] == null ? "not released" :character.release['jp'].substring(0,4)}`,
+         value: character.head + character.tail};
     });
 
     return await checkbox({// Is there a radio button version? Instead of using checkbox????????
@@ -69,11 +81,18 @@ const _selectionPrompt = async (characters) => {
     });
 };
 
+const _findAndRemove = (original, throwaway) => {
+    return original.filter((character) => {
+        return throwaway.includes(character.head + character.tail);
+    });
+};
+
 export const searchAmiibo = async (args) => {
     try {
-        const searchResult = await api.searchByKeyword(args.keyword);
-        console.log(searchResult)
-        // good luck
+        const amiibos = await api.searchByKeyword(args.keyword);
+        const throwaway = await _selectionPrompt(amiibos.amiibo);
+        const filtered = _findAndRemove(amiibos.amiibo,throwaway);
+        _printConsole(filtered);
     } catch (error) {
         console.error(error);
     }

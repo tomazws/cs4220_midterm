@@ -1,6 +1,3 @@
-// Initialize directory as project
-npm init
-
 // Install required packages
 npm install --save axios
 npm install --save yargs

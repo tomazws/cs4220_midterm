@@ -36,7 +36,7 @@ export const searchByKeyword = async (keyword) => {
         	- Amiibo Series:	https://amiiboapi.com/api/amiibo/?amiiboSeries=value
         	- Character		    https://amiiboapi.com/api/amiibo/?character=value
         */
-        const response = await axios.get(`${baseURL}?gameseries=${keyword}`);
+        const response = await axios.get(`${baseURL}?character=${keyword}`);
         return response.data;
     } catch (error) {
         return error;
