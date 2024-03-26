@@ -71,6 +71,8 @@ const _selectionPrompt = async (characters) => {
 
 export const searchAmiibo = async (args) => {
     try {
+        const searchResult = await api.searchByKeyword(args.keyword);
+        console.log(searchResult)
         // good luck
     } catch (error) {
         console.error(error);

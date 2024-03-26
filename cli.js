@@ -31,7 +31,7 @@ cli.js:
 
 import yargs from 'yargs/yargs';
 import { hideBin } from 'yargs/helpers';
-import { search, history } from './app.js';
+import { searchAmiibo, history } from './app.js';
 
 yargs(hideBin(process.argv))
     .usage('$0: Usage <command> [options]')
