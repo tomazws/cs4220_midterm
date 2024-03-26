@@ -42,8 +42,7 @@ app.js:
         Displays the history to the user in a user-friendly format
             Reference search_history.json
 */
-
-import { checkbox } from '@inquirer/prompts';
+import { select as select } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
 
@@ -52,7 +51,7 @@ const _printConsole = (amiibo) => {
     console.log('----------------------');
     amiibo.forEach(element => {
         console.log(element.name + " [" + element.gameSeries +"] (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
-         + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")")
+         + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
          console.log('----------------------');
     });
     
@@ -68,16 +67,10 @@ const _selectionPrompt = async (amiibos) => {
          value: character.head + character.tail};
     });
 
-    return await checkbox({// Is there a radio button version? Instead of using checkbox????????
+    return await select({// Is there a radio button version? Instead of using checkbox????????
         message: 'Select a character',
         choices: displayCharacters,
-        validate: (characters) => {
-            if (characters.length > 1) {
-                return 'Your may only select 1 character';
-            } else {
-                return true;
-            }
-        }
+        
     });
 };
 
