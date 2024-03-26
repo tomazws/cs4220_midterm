@@ -90,7 +90,6 @@ export const searchAmiibo = async (args) => {
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
         _printConsole(filtered);
 
-        // Retrieve detailed data for the selected item based on the cache option
         // If cache option is true
         //     Attempt to find the selected item in search_cache.json and return the item
         // If not found in the search_cache.json, or if cache option is false
