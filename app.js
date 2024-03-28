@@ -84,7 +84,7 @@ export const searchAmiibo = async (args) => {
         const amiibos = await api.searchByKeyword(args.keyword);
 
         // Save keyword in the mock database: search_history.json
-        // CODE HERE
+        db.create("search_history", args);
         
         // Prompt user to select an item from the search results
         const throwaway = await _selectionPrompt(amiibos.amiibo);
@@ -103,5 +103,5 @@ export const searchAmiibo = async (args) => {
 };
 
 export const history = async () => {
-    // Display a list of keywords recorded in seasrch history: search_history.json
+    // Display a list of keywords recorded in search history: search_history.json
 };
