@@ -29,7 +29,7 @@ app.js:
             IF cache option false (default)
                 Gets the selected item by unique identifier from the your API
                 Saves an entry in search_cache.json
-                    Reference: search_cache.json 
+                    Reference: search_cache.json
             IF cache option true
                 Attempts to find the selected item in search_cache.json and return the item
                 If not found in the search_cache.json - gets the selected item by unique identifier from the API
@@ -37,7 +37,7 @@ app.js:
                     Reference: search_cache.json
         Displays the detailed data to the user in a user-friendly format.
             NO Array/Object or JSON print outs.
-    
+
     Exports a function to handle logic for displaying the search history
         Retrieves the search history from the mock database
         Displays the history to the user in a user-friendly format
@@ -46,6 +46,7 @@ app.js:
 import { select as select } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
+import fs from 'fs'
 
 // Helper function for printing
 const _printConsole = (amiibo) => {
@@ -55,7 +56,7 @@ const _printConsole = (amiibo) => {
          + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
          console.log('----------------------');
     });
-    
+
 }
 
 const _selectionPrompt = async (amiibos) => {
@@ -82,14 +83,19 @@ export const searchAmiibo = async (args) => {
     try {
         // Search the API by keyword
         const amiibos = await api.searchByKeyword(args.keyword);
-
-        // Save keyword in the mock database: search_history.json
-        db.create("search_history", args);
-        
         // Prompt user to select an item from the search results
         const throwaway = await _selectionPrompt(amiibos.amiibo);
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
         _printConsole(filtered);
+        //Save the keyword and the amount of results in search_history.json
+        fs.appendFile("mock_database/search_history.json",
+          (JSON.stringify({
+            search: args.keyword,
+            resultCount: amiibos.amiibo.length
+          }) + "\n"),
+          (error) => {
+              if (error) throw error
+        });
 
         // If cache option is true
         //     Attempt to find the selected item in search_cache.json and return the item
@@ -103,5 +109,21 @@ export const searchAmiibo = async (args) => {
 };
 
 export const history = async () => {
-    // Display a list of keywords recorded in search history: search_history.json
+    try {
+        const searchHistory = await fs.promises.readFile("mock_database/search_history.json", "utf-8");
+        const searchHistoryDivided = searchHistory.split("\n");
+
+        console.log("Search History:\n-------------");
+        searchHistoryDivided.forEach(line => {
+            try {
+                const result = JSON.parse(line.trim());
+                console.log(result.search + " | " + result.resultCount);
+            } catch (error) {
+                //Usually means end of line
+                console.error("-------------");
+            }
+        });
+    } catch (error) {
+        console.error("Error reading search history:", error);
+    }
 };
