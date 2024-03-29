@@ -1,0 +1,80 @@
+/*
+CS4220 Midterm Project
+
+API:
+    AmiiboAPI
+
+API Description:
+    A RESTful API that contains the Amiibo Database that was created on the excel spreadsheet:
+    https://docs.google.com/spreadsheets/d/19E7pMhKN6x583uB6bWVBeaTMyBPtEAC-Bk59Y6cfgxA/edit#gid=0
+
+API documentations:
+    https://amiiboapi.com/docs/
+
+Authors:
+    Thomas Yeung
+    Isaac Mendoza
+    Jason Schmidt
+    Alberto Barboza
+    Angel Penate
+
+Proposed rundown:
+FEEDBACK #1
+- This is taking on alot - you really only need to search by 1. Pick the best from this list - meaning the ones that provide the most interesting data from the API.
+- This should not be a "Prompt"  this should be a cli command with a command arg.
+---- node cli.js search <keryword> -> node cli.js search mario <optional cache flag>
+1. Prompts the user to select search options:
+    - Search by:
+        - Name
+        - Type
+        - Game Series
+        - Amiibo Series
+        - Character
+
+1.5??
+FEEDBACK #1.5
+- Missing saving to search_history.json
+- search history contains the keyword in this case 'mario' and the results associated to 'mario'
+
+FEEDBACK #1
+- Here is where we "Prompt"
+- Prompt user to select one of the results from the list related to the previous search in this example "mario".
+2. User selects search option and enters keyword
+
+FEEDBACK #3
+- Not needed - see #1.
+3. Performs search based on selected option and keyword
+    - If search by:
+        - Name:                                     Use /api/amiibo/?name=value
+        - Type:                                     Use /api/amiibo/?type=value
+        - Game Series:                              Use /api/amiibo/?gameseries=value
+        - Amiibo Series:                            Use /api/amiibo/?amiiboSeries=value
+        - Character                                 Use /api/amiibo/?character=value
+
+FEEDBACK #4
+- Saves to search_cache.json NOT search_history.json
+- See #1.5
+4. Gets response from API, saves search results in search_history.json
+
+FEEDBACK #5
+- Not needed as should be handled already.
+- See #2.
+5. Prompts user to select ONE item from the search results
+
+FEEDBACK #6
+- Logic is correct - BUT also see #1.
+6. If !cache:
+    - Get item by ID from API:                      Use /api/amiibo/?id=value
+    - Save entry in search_cache.json
+    Else if cache:
+    - Attempt to find item in search_cache.json
+        - If not found, get item by ID from API:    Use /api/amiibo/?id=value
+            - Save entry in search_cache.json
+
+FEEDBACK - Yes.
+7. Display detailed data
+
+FEEDBACK #8
+- where is the history command??
+- node cli.js history ??
+*/

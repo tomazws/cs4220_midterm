@@ -88,14 +88,7 @@ export const searchAmiibo = async (args) => {
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
         _printConsole(filtered);
         //Save the keyword and the amount of results in search_history.json
-        fs.appendFile("mock_database/search_history.json",
-          (JSON.stringify({
-            search: args.keyword,
-            resultCount: amiibos.amiibo.length
-          }) + "\n"),
-          (error) => {
-              if (error) throw error
-        });
+        await db.create('search_history', {search: args.keyword, resultCount: amiibos.amiibo.length});
 
         // If cache option is true
         //     Attempt to find the selected item in search_cache.json and return the item
@@ -110,18 +103,10 @@ export const searchAmiibo = async (args) => {
 
 export const history = async () => {
     try {
-        const searchHistory = await fs.promises.readFile("mock_database/search_history.json", "utf-8");
-        const searchHistoryDivided = searchHistory.split("\n");
-
+        const searchHistory = await db.find('search_history');
         console.log("Search History:\n-------------");
-        searchHistoryDivided.forEach(line => {
-            try {
-                const result = JSON.parse(line.trim());
-                console.log(result.search + " | " + result.resultCount);
-            } catch (error) {
-                //Usually means end of line
-                console.error("-------------");
-            }
+        searchHistory.forEach((result) => {
+            console.log(result.search + " | " + result.resultCount);
         });
     } catch (error) {
         console.error("Error reading search history:", error);
