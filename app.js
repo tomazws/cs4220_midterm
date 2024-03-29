@@ -86,9 +86,24 @@ export const searchAmiibo = async (args) => {
         // Prompt user to select an item from the search results
         const throwaway = await _selectionPrompt(amiibos.amiibo);
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
-        _printConsole(filtered);
+        filtered[0].id = filtered[0].head + filtered[0].tail;
         //Save the keyword and the amount of results in search_history.json
         await db.create('search_history', {search: args.keyword, resultCount: amiibos.amiibo.length});
+
+        const cacheCheck = await db.find("search_cache");
+        let savedCache = false;
+
+        for (let cache of cacheCheck) {
+            if (cache[0].id == filtered[0].id) {
+                _printConsole(cache);
+                savedCache = true;
+            }
+        }
+
+        if (!savedCache) {
+            _printConsole(filtered);
+            await db.create("search_cache", filtered);
+        }
 
         // If cache option is true
         //     Attempt to find the selected item in search_cache.json and return the item
