@@ -55,10 +55,8 @@ const _printConsole = (amiibo) => {
         console.log(`Game Series: ${element.gameSeries}`);
         console.log("Release: (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
          + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
-         console.log(`Image: ${element.image}`);
-        // console.log(element.name + " [" + element.gameSeries +"] (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
-        //  + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
-         console.log('----------------------');
+        console.log(`Image: ${element.image}`);
+        console.log('----------------------');
     });
 
 }
@@ -71,7 +69,7 @@ const _selectionPrompt = async (amiibos) => {
          value: character.head + character.tail};
     });
 
-    return await select({// Is there a radio button version? Instead of using checkbox????????
+    return await select({
         message: 'Select a character',
         choices: displayCharacters
     });

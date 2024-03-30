@@ -43,12 +43,3 @@ export const searchByKeyword = async (keyword) => {
         return error;
     }
 };
-
-export const getDetailsById = async (id) => {
-    try {
-        const response = await axios.get(`${baseURL}?id=${id}`);
-        return response.data;
-    } catch (error) {
-        return error;
-    }
-};
