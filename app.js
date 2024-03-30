@@ -52,8 +52,13 @@ import fs from 'fs'
 const _printConsole = (amiibo) => {
     console.log('----------------------');
     amiibo.forEach(element => {
-        console.log(element.name + " [" + element.gameSeries +"] (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
+        console.log(`Character: ${element.name}`);
+        console.log(`Game Series: ${element.gameSeries}`);
+        console.log("Release: (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
          + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
+         console.log(`Image: ${element.image}`);
+        // console.log(element.name + " [" + element.gameSeries +"] (NA " + (element.release['na'] == null ? "not released" :element.release['na'].substring(0,4)) + ")"
+        //  + " (JP " + (element.release['jp'] == null ? "not released" :element.release['jp'].substring(0,4)) + ")");
          console.log('----------------------');
     });
 
@@ -104,13 +109,6 @@ export const searchAmiibo = async (args) => {
             _printConsole(filtered);
             await db.create("search_cache", filtered);
         }
-
-        // If cache option is true
-        //     Attempt to find the selected item in search_cache.json and return the item
-        // If not found in the search_cache.json, or if cache option is false
-        //     Get the selected item by unique identifier from the API
-        //     Save an entry in search_cache.json
-        // Display the detailed data of the selected character to the user in a user-friendly format
     } catch (error) {
         console.error(error);
     }
