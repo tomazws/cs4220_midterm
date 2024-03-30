@@ -95,9 +95,7 @@ export const searchAmiibo = async (args) => {
 
         // Retrieve detailed data for the selected item based on the cache option
         if (!args.cache) {
-            // We did not use this function because the initial search already returned all the detailed information of each found character
             // It will be slower to call the API again, since filtered already has all the information
-            // const amiibo = await api.getDetailsById(filtered[0].id);
             _printConsole(filtered);
 
             // Save the selected item in search_cache.json
@@ -111,7 +109,6 @@ export const searchAmiibo = async (args) => {
             // We are unable to utilize the find function with the search parameter
             // The db.js find function would need to be updated
             // so we pull the entire cache to loop through instead
-            // const cacheCheck = await db.find("search_cache", filtered[0].id);
             const cacheCheck = await db.find("search_cache");
             for (let cache of cacheCheck) {
                 if (cache[0].id == filtered[0].id) {
