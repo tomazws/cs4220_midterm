@@ -89,19 +89,30 @@ export const searchAmiibo = async (args) => {
         const throwaway = await _selectionPrompt(amiibos.amiibo);
         const filtered = _findAndRemove(amiibos.amiibo,throwaway);
         filtered[0].id = filtered[0].head + filtered[0].tail;
+        
         //Save the keyword and the amount of results in search_history.json
         await db.create('search_history', {search: args.keyword, resultCount: amiibos.amiibo.length});
 
-        const cacheCheck = await db.find("search_cache");
-        let savedCache = args.cache;
-
-        if (!savedCache) {
+        // Retrieve detailed data for the selected item based on the cache option
+        if (!args.cache) {
+            // We did not use this function because the initial search already returned all the detailed information of each found character
+            // It will be slower to call the API again, since filtered already has all the information
+            // const amiibo = await api.getDetailsById(filtered[0].id);
             _printConsole(filtered);
+
+            // Save the selected item in search_cache.json
             await db.create("search_cache", filtered);
             console.log("Not Cache");
         }
-        if (savedCache) {
+        if (args.cache) {
+            // Check if the selected item is in search_cache.json
             let cacheFound = false;
+            
+            // We are unable to utilize the find function with the search parameter
+            // The db.js find function would need to be updated
+            // so we pull the entire cache to loop through instead
+            // const cacheCheck = await db.find("search_cache", filtered[0].id);
+            const cacheCheck = await db.find("search_cache");
             for (let cache of cacheCheck) {
                 if (cache[0].id == filtered[0].id) {
                     _printConsole(cache);
@@ -110,6 +121,11 @@ export const searchAmiibo = async (args) => {
                     break;
                 }
             }
+
+            // If the selected item is not in search_cache.json,
+            // get the selected item by unique identifier from the API
+            // Same as above, since pulling from the API retrieves the same information
+            // as filtered, we just print the information from filtered
             if (!cacheFound) {
                 _printConsole(filtered);
                 await db.create("search_cache", filtered);
@@ -124,6 +140,7 @@ export const searchAmiibo = async (args) => {
 
 export const history = async () => {
     try {
+        // Retrieve the search history from the mock database
         const searchHistory = await db.find('search_history');
         console.log("Search History:\n-------------");
         searchHistory.forEach((result) => {

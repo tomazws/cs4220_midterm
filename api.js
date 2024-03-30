@@ -43,3 +43,13 @@ export const searchByKeyword = async (keyword) => {
         return error;
     }
 };
+
+// We did not use this function because the initial search already returned all the detailed information of each found character
+// export const getDetailsById = async (id) => {
+//     try {
+//         const response = await axios.get(`${baseURL}?id=${id}`);
+//         return response.data;
+//     } catch (error) {
+//         return error;
+//     }
+// };
