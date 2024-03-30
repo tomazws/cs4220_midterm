@@ -38,7 +38,7 @@ yargs(hideBin(process.argv))
     .usage('$0: Usage <command> [options]')
     .command(
         'search <keyword>',
-        'Search ??????',
+        'Search keyword in Amiibo API',
         (yargs) => {
             yargs.positional('keyword', {
                 describe: 'Search for amiibo',

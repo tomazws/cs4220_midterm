@@ -46,7 +46,6 @@ app.js:
 import { select as select } from '@inquirer/prompts';
 import * as api from './api.js';
 import * as db from './db.js';
-import fs from 'fs'
 
 // Helper function for printing
 const _printConsole = (amiibo) => {
