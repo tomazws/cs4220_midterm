@@ -93,19 +93,30 @@ export const searchAmiibo = async (args) => {
         await db.create('search_history', {search: args.keyword, resultCount: amiibos.amiibo.length});
 
         const cacheCheck = await db.find("search_cache");
-        let savedCache = false;
-
-        for (let cache of cacheCheck) {
-            if (cache[0].id == filtered[0].id) {
-                _printConsole(cache);
-                savedCache = true;
-            }
-        }
+        let savedCache = args.cache;
 
         if (!savedCache) {
             _printConsole(filtered);
             await db.create("search_cache", filtered);
+            console.log("Not Cache");
         }
+        if (savedCache) {
+            let cacheFound = false;
+            for (let cache of cacheCheck) {
+                if (cache[0].id == filtered[0].id) {
+                    _printConsole(cache);
+                    console.log("Pull from cache");
+                    cacheFound = true;
+                    break;
+                }
+            }
+            if (!cacheFound) {
+                _printConsole(filtered);
+                await db.create("search_cache", filtered);
+                console.log("Cache not found, added to cache");
+            }
+        }
+
     } catch (error) {
         console.error(error);
     }
