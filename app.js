@@ -60,11 +60,11 @@ const _printConsole = (amiibo) => {
     //     console.log(`Image: ${element.image}`);
     //     console.log('----------------------');
     // });
-    console.log(`Character: ${amiibo.name}`);
+    console.log(`Character:   ${amiibo.name}`);
     console.log(`Game Series: ${amiibo.gameSeries}`);
-    console.log("Release: (NA " + (amiibo.release['na'] == null ? "not released" :amiibo.release['na'].substring(0,4)) + ")"
-        + " (JP " + (amiibo.release['jp'] == null ? "not released" :amiibo.release['jp'].substring(0,4)) + ")");
-    console.log(`Image: ${amiibo.image}`);
+    console.log("NA Release:  " + (amiibo.release['na'] == null ? "Not released" :amiibo.release['na'].substring(0,4)));
+    console.log("JP Release:  " + (amiibo.release['jp'] == null ? "Not released" :amiibo.release['jp'].substring(0,4)));
+    console.log(`Image:       ${amiibo.image}`);
     console.log('----------------------');
 
 }
