@@ -44,12 +44,13 @@ export const searchByKeyword = async (keyword) => {
     }
 };
 
-// We did not use this function because the initial search already returned all the detailed information of each found character
-// export const getDetailsById = async (id) => {
-//     try {
-//         const response = await axios.get(`${baseURL}?id=${id}`);
-//         return response.data;
-//     } catch (error) {
-//         return error;
-//     }
-// };
+// ************************ MIDTERM FIXES ************************
+// Enabled the following function to get details by ID
+export const getDetailsById = async (id) => {
+    try {
+        const response = await axios.get(`${baseURL}?id=${id}`);
+        return response.data.amiibo;
+    } catch (error) {
+        return error;
+    }
+};
